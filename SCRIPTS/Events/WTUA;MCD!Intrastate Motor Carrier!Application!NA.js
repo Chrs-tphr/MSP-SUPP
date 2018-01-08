@@ -1,3 +1,5 @@
+logDebug("start WTUA App");
+
 if(wfTask == "Application Review" && matches(wfStatus,"Accepted","Incomplete Notice 1")){
 	if(doCreateRefLP()){
 		createRefLicProfFromLicProfMotorCarrier();
@@ -12,3 +14,5 @@ if(wfTask == "Certification" && wfStatus == "Issued"){
 	updateRefLpFromTransLp();
 	createCertOfAuth();
 }
+
+logDebug("end WTUA App");
