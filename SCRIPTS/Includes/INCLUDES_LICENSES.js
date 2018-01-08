@@ -217,7 +217,7 @@ function prepareAppForRenewal() {
 /******************************LIC PROF FUNCTIONS******************************************************/
 function maintainLPLookup() {
 
-	logDebug("Using LICENSESTATE = " + LICENSESTATE + " from EMSE:GlobalFlags"); //Issue State
+	logDebug("Using LICENSESTATE = " + LICENSESTATE + " from INCLUDES_CUSTOM_GLOBALS"); //Issue State
 	LICENSETYPE = appTypeArray[1] + " " + appTypeArray[2];  
 
 	licCapId = null; isNewLic = false; licIDString = null;  licObj = null; licCap = null;
