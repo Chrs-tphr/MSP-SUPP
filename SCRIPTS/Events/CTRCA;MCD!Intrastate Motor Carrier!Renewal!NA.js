@@ -1,4 +1,6 @@
-logDebug("Start CTRCA");
+include("INCLUDES_LICENSES");
+
+logDebug("Start CTRCA 3.0");
 
 var authCapId = getParentLicenseCapID(capId);
 
@@ -13,4 +15,4 @@ if(feeExists("RENEWAL") == false){
 	updateFee("RENEWAL","MCD_AUTH_RENEW","FINAL",1,"Y");
 }
 
-logDebug("End CTRCA");
+logDebug("End CTRCA 3.0");
