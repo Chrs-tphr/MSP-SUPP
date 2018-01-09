@@ -1,4 +1,4 @@
-eval(getScriptText("INCLUDES_LICENSES"));
+eval( aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput().getScriptByPK(aa.getServiceProviderCode(),"INCLUDES_LICENSES","ADMIN").getScriptText() + "");
 
 var authCapId = getParentLicenseCapID(capId);
 prepareAppForRenewal();
