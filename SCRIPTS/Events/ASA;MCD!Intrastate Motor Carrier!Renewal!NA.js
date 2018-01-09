@@ -1,3 +1,5 @@
+eval(getScriptText("INCLUDES_LICENSES"));
+
 var authCapId = getParentLicenseCapID(capId);
 prepareAppForRenewal();
 assessRenewalDecalFee();
