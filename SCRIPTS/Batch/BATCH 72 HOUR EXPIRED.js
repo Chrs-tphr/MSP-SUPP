@@ -1,63 +1,88 @@
 /*------------------------------------------------------------------------------------------------------/
-| Program: Batch 72 Hour Expired
+| Program: BATCH_72_HOUR_EXPIRED.js  Trigger: Batch
+| Client:
 |
-| Version 1.0 - Base Version. 
+| Version 1.0 - Base Version. 11/01/08 JHS
+| Version 2.0 - Updated for Masters Scripts 2.0  02/13/14 JHS
+| Version 3.0 - Uses productized Includes files where appropriate and adding test parameters
+| Jobs configured: 
 |
-| 
 /------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------/
 |
 | START: USER CONFIGURABLE PARAMETERS
 |
 /------------------------------------------------------------------------------------------------------*/
-var emailText = "";
-var debugText = "";
-var showDebug = false;	
-var showMessage = false;
-var message = "";
-var maxSeconds = 4.5 * 60;
-var br = "<br>";
-var agncyNme = "MSP";
+emailText = "";
+message = "";
+br = "<br>";
+useAppSpecificGroupName = false;
+/*------------------------------------------------------------------------------------------------------/
+| BEGIN Includes
+/------------------------------------------------------------------------------------------------------*/
+var SCRIPT_VERSION = 3.0
+var useCustomScriptFile = true;  // if true, use Events->Custom Script, else use Events->Scripts->INCLUDES_CUSTOM
+var useSA = false;
+var SA = null;
+var SAScript = null;
+var bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_FOR_EMSE");
+if(bzr.getSuccess() && bzr.getOutput().getAuditStatus() != "I"){
+	useSA = true;
+	SA = bzr.getOutput().getDescription();
+	bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_INCLUDE_SCRIPT");
+	if(bzr.getSuccess()){
+		SAScript = bzr.getOutput().getDescription();
+	}
+}
+
+if(SA){
+	eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", SA,useCustomScriptFile));
+	eval(getScriptText("INCLUDES_ACCELA_GLOBALS", SA,useCustomScriptFile));
+	eval(getScriptText(SAScript, SA));
+}else{
+	eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS",null,useCustomScriptFile));
+	eval(getScriptText("INCLUDES_ACCELA_GLOBALS",null,useCustomScriptFile));
+}
+
+eval(getScriptText("INCLUDES_CUSTOM",null,useCustomScriptFile));
+eval(getScriptText("INCLUDES_BATCH",null,false));
+
+function getScriptText(vScriptName, servProvCode, useProductScripts){
+	if(!servProvCode) servProvCode = aa.getServiceProviderCode();
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		if(useProductScripts){
+			var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+		}else{
+			var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
+		}
+		return emseScript.getScriptText() + "";
+	}catch (err){
+		return "";
+	}
+}
 
 /*------------------------------------------------------------------------------------------------------/
 |
 | END: USER CONFIGURABLE PARAMETERS
 |
 /------------------------------------------------------------------------------------------------------*/
+showDebug = true;
+if(String(aa.env.getValue("showDebug")).length > 0){
+	showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
+}
+
 sysDate = aa.date.getCurrentDate();
 batchJobResult = aa.batchJob.getJobID();
 batchJobName = "" + aa.env.getValue("BatchJobName");
-wfObjArray = null;
-
-
-eval(getMasterScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-eval(getScriptText("INCLUDES_BATCH"));
-eval(getMasterScriptText("INCLUDES_CUSTOM"));
-
-
-function getScriptText(vScriptName){
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
-	return emseScript.getScriptText() + "";
-}
-
-function getMasterScriptText(vScriptName){
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(),vScriptName);
-	return emseScript.getScriptText() + "";
-}
-
-
 batchJobID = 0;
-if (batchJobResult.getSuccess()){
+if(batchJobResult.getSuccess()){
 	batchJobID = batchJobResult.getOutput();
 	logDebug("Batch Job " + batchJobName + " Job ID is " + batchJobID);
-}
-else
+}else{
 	logDebug("Batch job ID not found " + batchJobResult.getErrorMessage());
-
+}
 
 /*----------------------------------------------------------------------------------------------------/
 |
@@ -65,7 +90,7 @@ else
 |
 /------------------------------------------------------------------------------------------------------*/
 
-/* test parameters 
+/*----Test Params----//
 aa.env.setValue("appGroup", "MCD");
 aa.env.setValue("appTypeType", "Intrastate Motor Carrier");
 aa.env.setValue("appSubType", "72 Hour Permit");
@@ -79,7 +104,6 @@ aa.env.setValue("skipAppStatus","Expired");
 aa.env.setValue("appStatus", "Expired");
 */
 
-
 var appGroup = getParam("appGroup");
 var appTypeType = getParam("appTypeType");
 var appSubtype = getParam("appSubType");
@@ -92,40 +116,34 @@ var lookAheadDays = getParam("lookAheadDays");
 var daySpan = getParam("daySpan");
 var appStatus = getParam("appStatus");
 
-
 /*----------------------------------------------------------------------------------------------------/
 |
 | End: BATCH PARAMETERS
 |
 /------------------------------------------------------------------------------------------------------*/
 var startDate = new Date();
-var startJSDate = new Date();
-startJSDate.setHours(0,0,0,0);
-var timeExpired = false;
-var useAppSpecificGroupName = false;
-var showDebug = true;
 
-var startTime = startDate.getTime();			// Start timer
+if(!fromDate.length){ // no "from" date, assume today
+	fromDate = dateAdd(null, 0);//fromDate = dateAdd(null, parseInt(lookAheadDays))
+}
+if(!toDate.length){ // no "to" date, assume today
+	toDate = fromDate;
+	//toDate = dateAdd(null, parseInt(lookAheadDays) + parseInt(daySpan))
+}
+var mailFrom = lookup("ACA_EMAIL_TO_AND_FROM_SETTING", "RENEW_LICENSE_AUTO_ISSUANCE_MAILFROM");
+var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
+
+logDebug("Date Range -- fromDate: " + fromDate + ", toDate: " + toDate)
+
+var startTime = startDate.getTime(); // Start timer
 var systemUserObj = aa.person.getUser("ADMIN").getOutput();
-if (appGroup=="")
-	appGroup="*";
-if (appTypeType=="")
-	appTypeType="*";
-if (appSubtype=="")
-	appSubtype="*";
-if (appCategory=="")
-	appCategory="*";
-var appType = appGroup+"/"+appTypeType+"/"+appSubtype+"/"+appCategory;	
-logDebug("appType = " + appType);
 
-
-var fromDate = dateAdd(null,parseInt(lookAheadDays));
-var toDate = dateAdd(null,parseInt(lookAheadDays)+parseInt(daySpan));
-fromJSDate = new Date(fromDate);
-toJSDate = new Date(toDate);
-var dFromDate = aa.date.parseDate(fromDate);
-var dToDate = aa.date.parseDate(toDate);
-logDebug("fromDate: " + fromDate + "  toDate: " + toDate);
+appGroup = appGroup == "" ? "*" : appGroup;
+appTypeType = appTypeType == "" ? "*" : appTypeType;
+appSubtype = appSubtype == "" ? "*" : appSubtype;
+appCategory = appCategory == "" ? "*" : appCategory;
+var appType = appGroup + "/" + appTypeType + "/" + appSubtype + "/" + appCategory;
 
 /*------------------------------------------------------------------------------------------------------/
 | <===========Main=Loop================>
@@ -134,16 +152,18 @@ logDebug("fromDate: " + fromDate + "  toDate: " + toDate);
 
 logDebug("Start of Job");
 
-mainProcess();
+try{
+	mainProcess();
+}catch (err){
+	logDebug("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber);
+	logDebug("Stack: " + err.stack);
+}
 
 logDebug("End of Job: Elapsed Time : " + elapsed() + " Seconds");
 
-if (emailAddress.length)
-	aa.sendMail("noreply@accela.com", emailAddress, "", agncyNme + " " + batchJobName + " Results", emailText);
+if(emailAddress.length)
+	aa.sendMail("noreply@accela.com", emailAddress, "", batchJobName + " Results", emailText);
 
-if (showDebug) 
-	aa.eventLog.createEventLog("DEBUG", "Batch Process", agncyNme + " " + batchJobName, aa.date.getCurrentDate(), aa.date.getCurrentDate(),"", emailText ,batchJobID);
-//aa.print(emailText);
 /*------------------------------------------------------------------------------------------------------/
 | <===========END=Main=Loop================>
 /-----------------------------------------------------------------------------------------------------*/

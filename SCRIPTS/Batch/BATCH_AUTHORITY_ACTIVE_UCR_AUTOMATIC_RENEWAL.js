@@ -90,50 +90,37 @@ if(batchJobResult.getSuccess()){
 |
 /------------------------------------------------------------------------------------------------------*/
 
-/********************Test Params*********************************
-
+/*----Test Params----//
 aa.env.setValue("lookAheadDays",45);
 aa.env.setValue("daySpan",0);
-
 aa.env.setValue("expirationStatus","Active");
 aa.env.setValue("newExpirationStatus","Active");
-
 aa.env.setValue("appStatus", "");
 aa.env.setValue("skipAppStatus","Expired,Permanently Discontinued,Revoked,Suspended");
 aa.env.setValue("newApplicationStatus", "");
-
 aa.env.setValue("fromDate","12/31/2017");
 aa.env.setValue("toDate","12/31/2017");
-
 aa.env.setValue("cStart", 1000);
 aa.env.setValue("cLimit", 2000);
-
 aa.env.setValue("emailAddress","batchscript@yahoo.com");
-
-****************************************************************/
+*/
 
 var appGroup = "MCD";
 var appTypeType = "Intrastate Motor Carrier";
 var appSubtype = "Certificate of Authority";
 var appCategory = "NA";
-
 var lookAheadDays = aa.env.getValue("lookAheadDays"); // Number of days from today
 var daySpan = aa.env.getValue("daySpan"); // Days to search (6 if run weekly, 0 if daily, etc.)
-
 var expStatus = "Active"; //   test for this expiration status
 var newExpStatus = "Active"; //   update to this expiration status
-
 var appStatus = getParam("appStatus");
 var skipAppStatusArray = getParam("skipAppStatus").split(","); //   Skip records with one of these application statuses
 var newAppStatus = getParam("newApplicationStatus"); //   update the CAP to this status
-
 var fromDate = getParam("fromDate"); // Hardcoded dates.   Use for testing only
 var toDate = getParam("toDate"); // ""
 var dFromDate = aa.date.parseDate(fromDate); //
 var dToDate = aa.date.parseDate(toDate); //
-
 var emailAddress = getParam("emailAddress"); //   email address to send log file to
-
 var cStart = getParam("cStart");
 var cLimit = getParam("cLimit");
 var ucrExpDateValidation = []; //array for updated CVED#'s that need to be validated.
@@ -146,12 +133,11 @@ var ucrExpDateValidation = []; //array for updated CVED#'s that need to be valid
 var startDate = new Date();
 
 if(!fromDate.length){ // no "from" date, assume today
-//	fromDate = dateAdd(null, 0);
-	fromDate = dateAdd(null, parseInt(lookAheadDays))
+	fromDate = dateAdd(null, 0);//fromDate = dateAdd(null, parseInt(lookAheadDays))
 }
 if(!toDate.length){ // no "to" date, assume today
-//	toDate = fromDate;
-	toDate = dateAdd(null, parseInt(lookAheadDays) + parseInt(daySpan))
+	toDate = fromDate;
+	//toDate = dateAdd(null, parseInt(lookAheadDays) + parseInt(daySpan))
 }
 var mailFrom = lookup("ACA_EMAIL_TO_AND_FROM_SETTING", "RENEW_LICENSE_AUTO_ISSUANCE_MAILFROM");
 var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
