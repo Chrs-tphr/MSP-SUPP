@@ -101,7 +101,7 @@ aa.env.setValue("newExpirationStatus","");
 aa.env.setValue("appStatus", "");
 aa.env.setValue("skipAppStatus","");
 aa.env.setValue("newApplicationStatus", "");
-aa.env.setValue("acaPerm", "");
+aa.env.setValue("acaDisplay", "");
 
 aa.env.setValue("fromDate","12/31/2017");
 aa.env.setValue("toDate","12/31/2017");
@@ -124,7 +124,7 @@ var newExpStatus = getParam("newExpirationStatus"); //   update to this expirati
 var appStatus = getParam("appStatus");
 var skipAppStatusArray = getParam("skipAppStatus").split(","); //   Skip records with one of these application statuses
 var newAppStatus = getParam("newApplicationStatus"); //   update the CAP to this status
-var acaPerm = getParam("acaPerm");
+var acaDisplay = getParam("acaDisplay");
 
 var fromDate = getParam("fromDate"); // Hardcoded dates.   Use for testing only
 var toDate = getParam("toDate"); // ""
@@ -246,13 +246,12 @@ function mainProcess(){
 									}
 									
 									if(updateLp){
-										//TODO update ref LP status for ACA search
 										//get refLp to edit standard fields for ACA display
 										var refLPModel = getRefLicenseProf(thisAltId);
 										if(!refLPModel){
 											logDebug("Ref LP " + refLPNum + " not found");
 										}else{
-											if(acaPerm == "Y"){
+											if(matches(acaDisplay,"Y","Yes")){
 												refLPModel.setAcaPermission(null);//the system interprets null as Y (this will display in ACA)
 											}else refLPModel.setAcaPermission("N");
 											
