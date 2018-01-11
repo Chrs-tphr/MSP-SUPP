@@ -1,5 +1,7 @@
 include("INCLUDES_LICENSES");
 
+showDebug = 1;
+
 logDebug("Start ASA 3.0");
 
 var authCapId = getParentLicenseCapID(capId);
@@ -16,3 +18,4 @@ if(feeExists("RENEWAL") == false){
 }
 
 logDebug("End ASA 3.0");
+
