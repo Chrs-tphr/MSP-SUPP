@@ -1,7 +1,7 @@
-logDebug(" --- Start ASIUA 3.0 ---");
+logDebug(" --- Start ASIUA;MCD!~!~!~.js 3.0 ---");
 
 
 
 
 
-logDebug(" --- End ASIUA 3.0 ---");
+logDebug(" --- End ASIUA;MCD!~!~!~.js 3.0 ---");
