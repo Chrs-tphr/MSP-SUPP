@@ -2,4 +2,4 @@
 //eval( aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput().getScriptByPK(aa.getServiceProviderCode(),"INCLUDES_WEB_SERVICES","ADMIN").getScriptText() + "");
 
 eval(getScriptText("INCLUDES_LICENSES"));
-//eval(getScriptText("INCLUDES_WEB_SERVICES"));
+eval(getScriptText("INCLUDES_WEB_SERVICES"));
