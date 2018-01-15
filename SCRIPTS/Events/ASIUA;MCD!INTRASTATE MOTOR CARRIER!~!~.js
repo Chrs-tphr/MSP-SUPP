@@ -1,7 +1,7 @@
-logDebug(" --- Start CAPS ASIUA;MCD!Intrastate Motor Carrier!~!~.js 3.0 ---");
+logDebug(" --- Start ASIUA;MCD!INTRASTATE MOTOR CARRIER!~!~.js 3.0 ---");
 
 
 
 
 
-logDebug(" --- End CAPS ASIUA;MCD!Intrastate Motor Carrier!~!~.js 3.0 ---");
+logDebug(" --- End ASIUA;MCD!INTRASTATE MOTOR CARRIER!~!~.js 3.0 ---");
