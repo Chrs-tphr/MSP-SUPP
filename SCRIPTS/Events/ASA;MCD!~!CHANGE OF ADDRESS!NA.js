@@ -1,1 +1,1 @@
-//updateCert("ADDRESSCHANGE");
+updateCert("ADDRESSCHANGE");
