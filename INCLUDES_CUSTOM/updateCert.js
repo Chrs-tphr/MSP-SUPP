@@ -34,14 +34,15 @@ function updateCert(updateType){
 			cFax = AInfo["Carrier Fax"];
 			cEmail = AInfo["Carrier Email"];
 			
-			if (addrLine1 && addrLine1 != "") cLic.setAddress1(addrLine1);
+			/*if (addrLine1 && addrLine1 != "")*/ cLic.setAddress1(addrLine1);
 			/*if (addrLine2 && addrLine2 != "")*/ cLic.setAddress2(addrLine2); //address line 2 can be removed from the Certificate of Authority and Ref LP
-			if (city && city!= "") cLic.setCity(city);
-			if (st && st!="") cLic.setState(st);
-			if (zip && zip != "") cLic.setZip(zip);
-			if (cPhone && cPhone != "") cLic.setPhone1(cPhone);
+			/*if (city && city!= "")*/ cLic.setCity(city);
+			/*if (st && st!="")*/ cLic.setState(st);
+			/*if (zip && zip != "")*/ cLic.setZip(zip);
+			/*if (cPhone && cPhone != "")*/ cLic.setPhone1(cPhone);
 			/*if (cFax && cFax != "")*/ cLic.setFax(cFax); //Fax number can be removed from the Certificate of Authority and Ref LP
-			if (cEmail && cEmail != "") cLic.setEMailAddress(cEmail);
+			/*if (cEmail && cEmail != "")*/ cLic.setEMailAddress(cEmail);
+			removeCapAddresses(pId);
 			copyAddresses(capId, pId);
 			break;
 		case "DISCONTINUANCE":
