@@ -67,13 +67,13 @@ function queryConflictVIN() {
 		}
 		uStmt.close();
 		conn.close();
-		//logDebug("DUPs: "+ dupList)
+		//logDebug("DUPs: "+ dupList);
 		for ( d in dupList){
 			thisDup = (""+dupList[d]).split("||")
 			if (thisDup.length < 2) continue;
-			thisCap = thisDup[0]
-			thisVIN = thisDup[1]
-			dupMPSCnumber = ""
+			thisCap = thisDup[0];
+			thisVIN = thisDup[1];
+			dupMPSCnumber = "";
 
 			var dupCapId = null;
 			var dupCapIdObj = aa.cap.getCapID(thisCap);
@@ -87,7 +87,7 @@ function queryConflictVIN() {
 
 				if (MPSCnumber != dupMPSCnumber) {
 					returnStruct.isIssue = true
-					returnStruct.issueMessage.push("VIN: " + thisVIN + " is currently active on Record: "+ thisCap )
+					returnStruct.issueMessage.push("VIN: " + thisVIN + " is currently active on Authority: "+ thisCap )
 				}
 			}
 		}
