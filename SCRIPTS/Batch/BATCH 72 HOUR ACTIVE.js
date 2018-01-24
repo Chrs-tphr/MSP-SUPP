@@ -13,6 +13,7 @@
 | START: USER CONFIGURABLE PARAMETERS
 |
 /------------------------------------------------------------------------------------------------------*/
+maxSeconds = 300;
 emailText = "";
 message = "";
 br = "<br>";
@@ -95,13 +96,16 @@ aa.env.setValue("appGroup", "MCD");
 aa.env.setValue("appTypeType", "Intrastate Motor Carrier");
 aa.env.setValue("appSubType", "72 Hour Permit");
 aa.env.setValue("appCategory", "NA"); 
-aa.env.setValue("emailAddress", "deanna.hoops@woolpert.com");
+aa.env.setValue("emailAddress", "batchscript@yahoo.com");
 aa.env.setValue("asiGroup", "PERMIT ACTIVATION");
 aa.env.setValue("asiField", "Start Date");
 aa.env.setValue("lookAheadDays", "-1");
 aa.env.setValue("daySpan", "1");
 aa.env.setValue("skipAppStatus","Active");
 aa.env.setValue("appStatus", "Active");
+
+aa.env.setValue("fromDate", null);
+aa.env.setValue("toDate", null);
 */
 
 var appGroup = getParam("appGroup");
@@ -115,6 +119,12 @@ var skipAppStatusArray = getParam("skipAppStatus").split(",");
 var lookAheadDays = getParam("lookAheadDays");
 var daySpan = getParam("daySpan");
 var appStatus = getParam("appStatus");
+
+var fromDate = getParam("fromDate"); // Hardcoded dates.   Use for testing only
+var toDate = getParam("toDate"); // ""
+
+var dFromDate = aa.date.parseDate(fromDate); //
+var dToDate = aa.date.parseDate(toDate); //
 
 /*----------------------------------------------------------------------------------------------------/
 |

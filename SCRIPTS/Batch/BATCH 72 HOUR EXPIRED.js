@@ -116,6 +116,13 @@ var lookAheadDays = getParam("lookAheadDays");
 var daySpan = getParam("daySpan");
 var appStatus = getParam("appStatus");
 
+var fromDate = getParam("fromDate"); // Hardcoded dates.   Use for testing only
+var toDate = getParam("toDate"); // ""
+var dFromDate = aa.date.parseDate(fromDate); //
+var dToDate = aa.date.parseDate(toDate); //
+
+var emailAddress = getParam("emailAddress"); //   email address to send log file to
+
 /*----------------------------------------------------------------------------------------------------/
 |
 | End: BATCH PARAMETERS

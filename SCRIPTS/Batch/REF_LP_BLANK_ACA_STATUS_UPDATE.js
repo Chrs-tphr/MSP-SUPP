@@ -15,6 +15,7 @@
 | START: USER CONFIGURABLE PARAMETERS
 |
 /------------------------------------------------------------------------------------------------------*/
+maxSeconds = 300;
 emailText = "";
 message = "";
 br = "<br>";
@@ -94,9 +95,18 @@ if(batchJobResult.getSuccess()){
 /------------------------------------------------------------------------------------------------------*/
 
 /*----Test Params----//
+aa.env.setValue("emailAddress", "batchscript@yahoo.com");
+aa.env.setValue("fromDate", null);
+aa.env.setValue("toDate", null);
 */
 
+var fromDate = getParam("fromDate"); // Hardcoded dates.   Use for testing only
+var toDate = getParam("toDate"); // ""
 
+var dFromDate = aa.date.parseDate(fromDate); //
+var dToDate = aa.date.parseDate(toDate); //
+
+var emailAddress = getParam("emailAddress"); //   email address to send log file to
 
 /*----------------------------------------------------------------------------------------------------/
 |

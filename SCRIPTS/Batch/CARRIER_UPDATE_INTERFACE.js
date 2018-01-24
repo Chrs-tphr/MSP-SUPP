@@ -13,6 +13,7 @@
 | START: USER CONFIGURABLE PARAMETERS
 |
 /------------------------------------------------------------------------------------------------------*/
+maxSeconds = 300;
 emailText = "";
 message = "";
 br = "<br>";
@@ -93,13 +94,22 @@ if(batchJobResult.getSuccess()){
 
 /*----Test Params----//
 aa.env.setValue("inputDataFile", "");
-aa.env.setValue("delimiter","");
-aa.env.setValue("emailAddress", "");
+aa.env.setValue("delimiter","|");
+aa.env.setValue("emailAddress", "batchscript@yahoo.com");
+
+aa.env.setValue("fromDate", null);
+aa.env.setValue("toDate", null);
 */
 
 var LIC_PROF_UDAPTE_DATA = getParam("inputDataFile");
 var DELIM = getParam("delimiter");
 var emailAddress = getParam("emailAddress");
+
+var fromDate = getParam("fromDate"); // Hardcoded dates.   Use for testing only
+var toDate = getParam("toDate"); // ""
+
+var dFromDate = aa.date.parseDate(fromDate); //
+var dToDate = aa.date.parseDate(toDate); //
 
 /*----------------------------------------------------------------------------------------------------/
 |
