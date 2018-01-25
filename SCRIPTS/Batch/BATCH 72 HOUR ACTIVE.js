@@ -120,7 +120,7 @@ var lookAheadDays = getParam("lookAheadDays");
 var daySpan = getParam("daySpan");
 var appStatus = getParam("appStatus");
 
-var fromDate = getParam("fromDate"); // Hardcoded dates.   Use for testing only
+//var fromDate = getParam("fromDate"); // Hardcoded dates.   Use for testing only
 var toDate = getParam("toDate"); // ""
 
 var dFromDate = aa.date.parseDate(fromDate); //
