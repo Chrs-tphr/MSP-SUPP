@@ -10,4 +10,4 @@ if(Date.parse(AInfo["Start Date"]) > Date.parse(tomorrow)){
 	updateAppStatus("Pending", "set by script");
 }
 
-//for demo
+//this was added in AA
