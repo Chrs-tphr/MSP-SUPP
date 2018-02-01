@@ -9,3 +9,5 @@ if(matches(AInfo["Start Date"],today,tomorrow)){
 if(Date.parse(AInfo["Start Date"]) > Date.parse(tomorrow)){
 	updateAppStatus("Pending", "set by script");
 }
+
+//for demo
