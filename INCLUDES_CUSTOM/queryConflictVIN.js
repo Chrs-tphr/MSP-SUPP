@@ -14,6 +14,7 @@ function queryConflictVIN() {
 	for ( i in lpList) {
 		//Only get the 1st LIC # (per Chris)
 		MPSCnumber = lpList[i].getLicenseNbr()
+		logDebug("MPSCnumber: "+MPSCnumber);
 		break;
 	}
 	
