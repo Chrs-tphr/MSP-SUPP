@@ -14,7 +14,6 @@ function queryConflictVIN() {
 	for ( i in lpList) {
 		//Only get the 1st LIC # (per Chris)
 		MPSCnumber = lpList[i].getLicenseNbr()
-		logDebug("MPSCnumber: "+MPSCnumber);
 		break;
 	}
 	
@@ -88,7 +87,7 @@ function queryConflictVIN() {
 
 				if (MPSCnumber != dupMPSCnumber) {
 					returnStruct.isIssue = true
-					returnStruct.issueMessage.push("VIN: " + thisVIN + " is currently active on Authority: "+ thisCap )
+					returnStruct.issueMessage.push("For current CVED#/DupCVED#: "+MPSCnumber+" / "+dupMPSCnumber+" VIN: " + thisVIN + " is currently active on Authority: "+ thisCap )
 				}
 			}
 		}
