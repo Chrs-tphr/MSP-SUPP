@@ -85,9 +85,9 @@ function queryConflictVIN() {
 					break;
 				}
 
-				if (MPSCnumber != dupMPSCnumber) {
+				if (parentCapId != dupMPSCnumber) {
 					returnStruct.isIssue = true
-					returnStruct.issueMessage.push("For current CVED#/DupCVED#: "+MPSCnumber+" / "+dupMPSCnumber+" VIN: " + thisVIN + " is currently active on Authority: "+ thisCap )
+					returnStruct.issueMessage.push("For current CVED#/DupCVED#: "+parentCapId+" / "+dupMPSCnumber+" VIN: " + thisVIN + " is currently active on Authority: "+ thisCap )
 				}
 			}
 		}
