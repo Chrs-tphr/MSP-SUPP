@@ -73,7 +73,7 @@ function queryConflictVIN() {
 			if (thisDup.length < 2) continue;
 			thisCap = thisDup[0];
 			thisVIN = thisDup[1];
-			var dupMPSCnumber = "";
+			dupMPSCnumber = "";
 
 			var dupCapId = null;
 			var dupCapIdObj = aa.cap.getCapID(thisCap);
