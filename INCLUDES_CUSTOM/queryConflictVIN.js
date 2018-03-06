@@ -8,7 +8,7 @@ function queryConflictVIN() {
 		return returnStruct
 	var vinList = new Array()
 	var dupList = new Array()
-	var MPSCnumber = ""
+	var MPSCnumber = "not over written"
 	
 	var lpList = getLicenseProfessional(capId)
 	for ( i in lpList) {
