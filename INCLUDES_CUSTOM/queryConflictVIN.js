@@ -8,7 +8,7 @@ function queryConflictVIN() {
 		return returnStruct
 	var vinList = new Array()
 	var dupList = new Array()
-	var MPSCnumber = "not over written"
+	var MPSCnumber = ""
 	
 	var lpList = getLicenseProfessional(capId)
 	for ( i in lpList) {
@@ -87,7 +87,7 @@ function queryConflictVIN() {
 
 				if (parentCapId != dupMPSCnumber) {
 					returnStruct.isIssue = true
-					returnStruct.issueMessage.push("For current CVED#/DupCVED#: "+parentCapId+" / "+dupMPSCnumber+" VIN: " + thisVIN + " is currently active on Authority: "+ thisCap )
+					returnStruct.issueMessage.push("VIN: " + thisVIN + " is currently active on Authority: "+ thisCap )
 				}
 			}
 		}
