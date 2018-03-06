@@ -4,3 +4,7 @@ if(dupVINCheck.isIssue){
 	showMessage = true;
 	comment(dupVINCheck.issueMessage.join("\n<br>"));
 }
+
+function breakTest(){
+	if(true)break;
+}
