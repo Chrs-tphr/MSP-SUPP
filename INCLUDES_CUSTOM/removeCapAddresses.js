@@ -12,11 +12,11 @@ function removeCapAddresses(capId){
 			}
 		}else{
 			logDebug("No addresses on cap");
-			break;
+			return;
 		}
 	}else{
 		logDebug("Could not get address list from cap");
-		break;
+		return;
 	}
 	if(aa.address.getAddressByCapId(capId).getOutput().length == 0){
 		logDebug("Addresses successfully removed from cap");
