@@ -6,5 +6,5 @@ if(dupVINCheck.isIssue){
 }
 
 function breakTest(){
-	if(true)break;
+	if(true)break breakTest;
 }
