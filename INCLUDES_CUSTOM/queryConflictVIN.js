@@ -10,10 +10,12 @@ function queryConflictVIN() {
 	var dupList = new Array()
 	var MPSCnumber = ""
 	
-	var lpList = getLicenseProfessional(capId)
+	var lpList = getLicenseProfessional(capId);
+	comment("lpList: "+lpList);
 	for ( i in lpList) {
 		//Only get the 1st LIC # (per Chris)
-		MPSCnumber = lpList[i].getLicenseNbr()
+		MPSCnumber = lpList[i].getLicenseNbr();
+		comment("MPSCnumber: "+MPSCnumber);
 		break;
 	}
 	
@@ -85,7 +87,7 @@ function queryConflictVIN() {
 					break;
 				}
 
-				if (parentCapId != dupMPSCnumber) {
+				if (MPSCnumber != dupMPSCnumber) {
 					returnStruct.isIssue = true
 					returnStruct.issueMessage.push("VIN: " + thisVIN + " is currently active on Authority: "+ thisCap )
 				}
