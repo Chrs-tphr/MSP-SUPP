@@ -11,6 +11,7 @@ function queryConflictVIN(){//optional param cvedNum for current carrier
 	var MPSCnumber = "";
 	
 	logDebug("capId: "+capId);
+	viewObj(capId);
 	
 	var lpList = getLicenseProfessional(capId);
 	if(lpList)
