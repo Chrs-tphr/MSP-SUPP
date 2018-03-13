@@ -1,4 +1,4 @@
-function queryConflictVIN(cvedNum) {
+function queryConflictVIN(){//optional param cvedNum for current carrier
 	var returnStruct = { 
 		'isIssue': false,
 		'issueMessage': new Array()
@@ -8,15 +8,23 @@ function queryConflictVIN(cvedNum) {
 		return returnStruct
 	var vinList = new Array()
 	var dupList = new Array()
-	var MPSCnumber = ""
+	var MPSCnumber = "";
+	
+	logDebug("capId: "+capId);
 	
 	var lpList = getLicenseProfessional(capId);
-	comment("lpList: "+lpList);
+	logDebug("lpList: "+lpList.getOutput());
+	
 	for ( i in lpList) {
 		//Only get the 1st LIC # (per Chris)
 		MPSCnumber = lpList[i].getLicenseNbr();
-		comment("MPSCnumber: "+MPSCnumber);
+		comment("MPSCnumber from lp list: "+MPSCnumber);
 		break;
+	}
+	
+	if(MPSCnumber == "" && arguments.length == 1 && !matches(arguments[0],null,"")){
+			MPSCnumber = arguments[0];
+			comment("MPSCnumber from param: "+MPSCnumber);
 	}
 	
 
@@ -87,7 +95,7 @@ function queryConflictVIN(cvedNum) {
 					break;
 				}
 
-				if (cvedNum != dupMPSCnumber) {
+				if (MPSCnumber != dupMPSCnumber) {
 					returnStruct.isIssue = true
 					returnStruct.issueMessage.push("VIN: " + thisVIN + " is currently active on Authority: "+ thisCap )
 				}
