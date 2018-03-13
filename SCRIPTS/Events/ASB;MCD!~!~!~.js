@@ -5,6 +5,9 @@ if(publicUser){
 	var dupVINCheck = queryConflictVIN(pCvedNum);
 }
 else{
+	showDebug = true;
+	showMessage = true;
+	logDebug("running asb in AA, checking for duplicate vin's")
 	var dupVINCheck = queryConflictVIN();
 }
 
