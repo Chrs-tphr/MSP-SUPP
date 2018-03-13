@@ -14,7 +14,7 @@ function queryConflictVIN(){//optional param cvedNum for current carrier
 	
 	var lpList = getLicenseProfessional(capId);
 	if(lpList)
-		logDebug("lpList: "+lpList.getOutput());
+		logDebug("lpList: "+lpList);
 	
 	for ( i in lpList) {
 		//Only get the 1st LIC # (per Chris)
