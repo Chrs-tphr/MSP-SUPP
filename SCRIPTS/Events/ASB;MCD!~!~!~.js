@@ -1,10 +1,13 @@
-var capModelInited = aa.env.getValue("CAP_MODEL_INITED");
-logDebug("capModelInited: "+capModelInited);
+if(publicUser){
+	var pCvedNum = parentCapId.getCustomID();
+	logDebug("pCvedNum: "+pCvedNum);
+	
+	var dupVINCheck = queryConflictVIN(pCvedNum);
+}
+else{
+	var dupVINCheck = queryConflictVIN();
+}
 
-var pCvedNum = parentCapId.getCustomID();
-logDebug("pCvedNum: "+pCvedNum);
-
-var dupVINCheck = queryConflictVIN(pCvedNum);
 if(dupVINCheck.isIssue){
 	cancel = true;
 	showMessage = true;
