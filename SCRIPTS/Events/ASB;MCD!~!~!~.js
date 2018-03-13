@@ -1,3 +1,5 @@
+logDebug("parentCapId::: "+parentCapId);
+
 var dupVINCheck = queryConflictVIN();
 if(dupVINCheck.isIssue){
 	cancel = true;
