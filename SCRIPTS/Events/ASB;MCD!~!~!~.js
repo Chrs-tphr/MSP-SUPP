@@ -1,6 +1,11 @@
 logDebug("In ASB Event script");
-var pcid = capModel.getParentCapID();
-logDebug("pcid: "+pcid);
+
+//var thisCapId = aa.cap.getCapID();
+logDebug("CAEBusinessName: "+CAEBusinessName);
+
+//var pcid = capModel.getParentCapID();
+//logDebug("pcid: "+pcid);
+
 cancel = true;
 showMessage = true;
 
