@@ -1,5 +1,6 @@
 logDebug("In ASB Event script");
-logDebug("parentCapId: "+parentCapId);
+var pcid = aa.cap.getParentCapID();
+logDebug("pcid: "+pcid);
 cancel = true;
 showMessage = true;
 
