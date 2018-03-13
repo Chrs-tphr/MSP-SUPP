@@ -1,5 +1,6 @@
 logDebug("parentCapId::: "+parentCapId);
-var cvedNum = parentCapId.getAltID();
+viewObj(parentCapId);
+//var cvedNum = parentCapId.getAltID();
 
 var dupVINCheck = queryConflictVIN();
 if(dupVINCheck.isIssue){
