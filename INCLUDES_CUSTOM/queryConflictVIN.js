@@ -1,4 +1,4 @@
-function queryConflictVIN() {
+function queryConflictVIN(cvedNum) {
 	var returnStruct = { 
 		'isIssue': false,
 		'issueMessage': new Array()
@@ -87,7 +87,7 @@ function queryConflictVIN() {
 					break;
 				}
 
-				if (MPSCnumber != dupMPSCnumber) {
+				if (cvedNum != dupMPSCnumber) {
 					returnStruct.isIssue = true
 					returnStruct.issueMessage.push("VIN: " + thisVIN + " is currently active on Authority: "+ thisCap )
 				}
