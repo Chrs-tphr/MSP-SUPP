@@ -7,9 +7,12 @@ if(publicUser){
 else{
 	showDebug = true;
 	showMessage = true;
-	logDebug("running asb in AA, checking for duplicate vin's")
+	logDebug("running asb in AA, checking for duplicate vin's");
 	var dupVINCheck = queryConflictVIN();
 }
+
+
+logDebug("dupVINCheck.isIssue: "+dupVINCheck.isIssue);
 
 if(dupVINCheck.isIssue){
 	cancel = true;
