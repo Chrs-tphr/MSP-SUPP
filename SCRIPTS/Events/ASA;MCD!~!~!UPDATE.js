@@ -1,3 +1,4 @@
+logDebug("parentCapId: "+parentCapId)
 if(!parentCapId){
 	logDebug("parentCapId is not defined, unable to update Certificate of Authority");
 }else{
