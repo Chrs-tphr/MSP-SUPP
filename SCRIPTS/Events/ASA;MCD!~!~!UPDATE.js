@@ -5,6 +5,6 @@ if(!parentCapId){
 		updateAppStatus(AInfo["New Authority Status"]);
 	}
 	if(AInfo["Update Expiration"] == "CHECKED"){
-		editParentExpiration(AInfo["New Expiration Status"],AInfo["New Expiration Date"]);
+		editParentExpiration(AInfo["New Expiration Status"],"12/31/"+AInfo["New Expiration Year"]);
 	}
 }
