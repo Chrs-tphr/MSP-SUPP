@@ -149,6 +149,36 @@ function updateCert(updateType){
 			removeASITable("EQUIPMENT LIST", pId);
 			copyASITables(capId, pId);
 			break;
+		case "STAFFUPDATE":
+			if(AInfo["Update Authority Status"] == "CHECKED"){
+				var aStatus = AInfo["New Authority Status"];
+				updateAppStatus(aStatus, "", pId);
+				
+				editRefLicProfAttribute(existingCarrierNum, "INTRASTATE AUTHORITY STATUS", aStatus);
+				editRefLicProfAttribute(existingCarrierNum, "INTRASTATE AUTHORITY STATUS DA", dateAdd(null, 0));
+				
+				//get refLp after attr updates
+				cLic = getRefLicenseProf(existingCarrierNum);
+				
+				//edit standard refLp fields for ACA display
+				cLic.setAcaPermission(null);//the system interprets null as Y (this will display in ACA)
+				cLic.setInsuranceCo(aStatus);
+			}
+
+			if(AInfo["Update Expiration"] == "CHECKED"){
+				var eStatus = AInfo["New Expiration Status"];
+				var eDate = "12/31/"+AInfo["New Expiration Year"];
+				editParentExpiration(eStatus,eDate);
+				editRefLicProfAttribute(existingCarrierNum, "INTRASTATE AUTHORITY EXPIRATIO", dateAdd(eDate, 0));
+				
+				//get refLp after attr updates
+				cLic = getRefLicenseProf(existingCarrierNum);
+			}
+			
+			//close update amendment
+			updateAppStatus("Closed");
+			
+			break;
 		default: break;
 	}
 	modifyRefLPAndSubTran(pId, cLic);
