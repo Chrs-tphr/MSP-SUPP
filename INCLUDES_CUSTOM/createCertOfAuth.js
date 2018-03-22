@@ -1,7 +1,5 @@
 function createCertOfAuth() {
-	logDebug("in createCertOfAuth()");
 	mpscNum = getMPSCNumFromLP();
-	logDebug("");
 	if (mpscNum != null) {
 		var existResult = aa.cap.getCapID(mpscNum).getSuccess();
 		if(!existResult){
@@ -36,15 +34,10 @@ function createCertOfAuth() {
 	
 				var ignore = lookup("EMSE:ASI Copy Exceptions","License/*/*/*"); 
 				var ignoreArr = new Array();
-				if(ignore != null) ignoreArr = ignore.split("|"); 
-				
-				logDebug("before copyAppSpecific()");
-				copyAppSpecific(newLicId);
-				logDebug("before copyASITables()");
+				if(ignore != null) ignoreArr = ignore.split("|");
+				copyAppSpecific(newLicId,ignoreArr);
 				copyASITables(capId,newLicId);
-				logDebug("before linkMPSCtoPU()");
 				linkMPSCtoPU(mpscNum, capId);
-				logDebug("after linkMPSCtoPU()");
 				
 				//get refLp to edit standard fields for ACA display
 				var refLPModel = getRefLicenseProf(mpscNum);
