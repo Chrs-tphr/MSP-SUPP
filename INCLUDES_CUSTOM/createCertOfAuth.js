@@ -32,10 +32,10 @@ function createCertOfAuth() {
 					logDebug("RefLP License Issued Date updated to: "+cIDate);
 				}
 	
-				var ignore = lookup("EMSE:ASI Copy Exceptions","License/*/*/*"); 
-				var ignoreArr = new Array();
-				if(ignore != null) ignoreArr = ignore.split("|"); 
-				copyAppSpecific(newLicId,ignoreArr);
+//				var ignore = lookup("EMSE:ASI Copy Exceptions","License/*/*/*"); 
+//				var ignoreArr = new Array();
+//				if(ignore != null) ignoreArr = ignore.split("|"); 
+				copyAppSpecific(newLicId);
 				copyASITables(capId,newLicId);
 				linkMPSCtoPU(mpscNum, capId);
 				
