@@ -1,5 +1,7 @@
 function createCertOfAuth() {
+	logDebug("in createCertOfAuth()");
 	mpscNum = getMPSCNumFromLP();
+	logDebug("");
 	if (mpscNum != null) {
 		var existResult = aa.cap.getCapID(mpscNum).getSuccess();
 		if(!existResult){
@@ -32,12 +34,17 @@ function createCertOfAuth() {
 					logDebug("RefLP License Issued Date updated to: "+cIDate);
 				}
 	
-//				var ignore = lookup("EMSE:ASI Copy Exceptions","License/*/*/*"); 
-//				var ignoreArr = new Array();
-//				if(ignore != null) ignoreArr = ignore.split("|"); 
+				var ignore = lookup("EMSE:ASI Copy Exceptions","License/*/*/*"); 
+				var ignoreArr = new Array();
+				if(ignore != null) ignoreArr = ignore.split("|"); 
+				
+				logDebug("before copyAppSpecific()");
 				copyAppSpecific(newLicId);
+				logDebug("before copyASITables()");
 				copyASITables(capId,newLicId);
+				logDebug("before linkMPSCtoPU()");
 				linkMPSCtoPU(mpscNum, capId);
+				logDebug("after linkMPSCtoPU()");
 				
 				//get refLp to edit standard fields for ACA display
 				var refLPModel = getRefLicenseProf(mpscNum);
@@ -161,4 +168,5 @@ function createCertOfAuth() {
 			logDebug("The existing Authority: "+mpscNum+" was updated and has been reissued");
 		}
 	}
+	logDebug("No CVED# found on Application");
 }
