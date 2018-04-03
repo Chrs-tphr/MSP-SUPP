@@ -8,7 +8,7 @@ function validateCapLP()
 	
 	var lpList = getLicenseProfessional(capId);
 	
-	if(lpList)
+	//if(lpList)
 		comment("lpList: "+lpList);
 		
 	for ( i in lpList) 
