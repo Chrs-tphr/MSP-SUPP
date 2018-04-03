@@ -1,8 +1,4 @@
 function updateCert(updateType){
-	
-	//New line below for merge test
-	if(true)logDebug("Yay!");
-	
 	pId = getParent();
 	existingCarrierNum = pId.getCustomID();
 	var cLic = getRefLicenseProf(existingCarrierNum);
