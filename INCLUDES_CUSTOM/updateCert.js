@@ -1,5 +1,5 @@
 function updateCert(updateType){
-	pId = getParent(); //this is a new comment 
+	pId = getParent(); 
 	existingCarrierNum = pId.getCustomID();
 	var cLic = getRefLicenseProf(existingCarrierNum);
 	
