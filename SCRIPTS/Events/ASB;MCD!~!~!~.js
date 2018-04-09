@@ -1,9 +1,11 @@
 //Comment out until next comment for testing purposes
 if(publicUser){
-	var pCvedNum = parentCapId.getCustomID();
-	logDebug("pCvedNum: "+pCvedNum);
-	
-	var dupVINCheck = queryConflictVIN(pCvedNum);
+	if(appMatch("MCD/*/Application/NA")||appMatch("MCD/*/Equipment List/NA")){
+		var pCvedNum = parentCapId.getCustomID();
+		logDebug("pCvedNum: "+pCvedNum);
+		
+		var dupVINCheck = queryConflictVIN(pCvedNum);
+	}
 }else{
 	showDebug = true;
 	showMessage = true;
