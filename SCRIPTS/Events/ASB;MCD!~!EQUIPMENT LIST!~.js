@@ -1,3 +1,5 @@
+/*
+
 if(publicUser){
 	var pCvedNum = parentCapId.getCustomID();
 	logDebug("pCvedNum: "+pCvedNum);
@@ -18,3 +20,5 @@ if(publicUser){
 		comment(dupVINCheck.issueMessage.join("\n<br>"));
 	}
 }
+
+*/
