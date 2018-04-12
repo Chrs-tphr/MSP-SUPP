@@ -150,19 +150,16 @@ function updateCert(updateType){
 			copyASITables(capId, pId);
 			break;
 		case "STAFFUPDATE":
+			//attr updates
 			if(AInfo["Update Authority Status"] == "CHECKED"){
 				var aStatus = AInfo["New Authority Status"];
 				updateAppStatus(aStatus, "", pId);
 				
 				editRefLicProfAttribute(existingCarrierNum, "INTRASTATE AUTHORITY STATUS", aStatus);
 				editRefLicProfAttribute(existingCarrierNum, "INTRASTATE AUTHORITY STATUS DA", dateAdd(null, 0));
-				
+
 				//get refLp after attr updates
 				cLic = getRefLicenseProf(existingCarrierNum);
-				
-				//edit standard refLp fields for ACA display
-				cLic.setAcaPermission(null);//the system interprets null as Y (this will display in ACA)
-				cLic.setInsuranceCo(aStatus);
 			}
 
 			if(AInfo["Update Expiration"] == "CHECKED"){
@@ -173,6 +170,15 @@ function updateCert(updateType){
 				
 				//get refLp after attr updates
 				cLic = getRefLicenseProf(existingCarrierNum);
+			}
+			
+			//std updates
+			if(AInfo["Update Authority Status"] == "CHECKED"){
+				var aStatus = AInfo["New Authority Status"];
+				
+				//edit standard refLp fields for ACA display
+				cLic.setAcaPermission(null);//the system interprets null as Y (this will display in ACA)
+				cLic.setInsuranceCo(aStatus);
 			}
 			
 			//close update amendment
