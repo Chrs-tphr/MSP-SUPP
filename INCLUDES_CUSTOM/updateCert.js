@@ -194,18 +194,16 @@ function updateCert(updateType){
 				cLic = getRefLicenseProf(existingCarrierNum);
 			}
 			
-			if(AInfo["Update FMC Number"] == "CHECKED"){
-				cLic.setAddress3(AInfo["New FMC Number"]);
-				//get refLp after attr updates
-				cLic = getRefLicenseProf(existingCarrierNum);
-			}
-			
 			if(AInfo["Update UCR Status"] == "CHECKED"){
 				editRefLicProfAttribute(existingCarrierNum, "INTERSTATE UCR STATUS", AInfo["New UCR Status"]);
 				editRefLicProfAttribute(existingCarrierNum, "INTERSTATE UCR STATUS DATE", AInfo["UCR Effective Date"]);
 				editRefLicProfAttribute(existingCarrierNum, "INTERSTATE UCR EXPIRATION DATE", AInfo["UCR Exipration Date"]);
 				//get refLp after attr updates
 				cLic = getRefLicenseProf(existingCarrierNum);
+			}
+			
+			if(AInfo["Update FMC Number"] == "CHECKED"){
+				cLic.setAddress3(AInfo["New FMC Number"]);
 			}
 			
 			//close amendment
