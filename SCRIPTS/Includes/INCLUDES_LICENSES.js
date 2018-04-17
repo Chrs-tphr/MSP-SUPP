@@ -157,10 +157,14 @@ function completeRenewalOnWorkflow() {
 				}
 			}
 		}
-		if (isWorkflowDenyForReview(capID, aa.env.getValue("WorkflowTask"), aa.env.getValue("SD_STP_NUM"), aa.env.getValue("ProcessID"),  aa.env.getValue("WorkflowStatus"))) {
+		else if (isWorkflowDenyForReview(capID, aa.env.getValue("WorkflowTask"), aa.env.getValue("SD_STP_NUM"), aa.env.getValue("ProcessID"),  aa.env.getValue("WorkflowStatus"))) {
 			if (isReadyRenew(parentLicenseCAPID)) {
 				renewalCapProject = getRenewalCapByParentCapIDForReview(parentLicenseCAPID);
 				if (renewalCapProject != null) {
+					if (activeLicense(parentLicenseCAPID)) {
+						renewalCapProject.setStatus("Complete");
+						aa.cap.updateProject(renewalCapProject);
+					}
 					if (sendLicEmails) aa.expiration.sendDeniedNoticeEmailToCitizenUser(parentLicenseCAPID)
 				}
 			}
@@ -827,7 +831,10 @@ function isWorkflowDenyForReview(capID, wfTask, stepNum, processID, taskStatus) 
 		//2. Check to see if the agency user approve renewal application .
 		if (taskItemScriptModel.getTaskDescription().equals(wfTask) && "Renewal Status".equals(wfTask) && "Denied".equals(taskStatus)) {
 			return true;
-		}	
+		}
+		if (taskItemScriptModel.getTaskDescription().equals(wfTask) && "Application Review".equals(wfTask) && ("Dismissed".equals(taskStatus) || "Withdrawn".equals(taskStatus))) {
+			return true;
+		}
 	}  
     	else { logDebug("ERROR: Failed to get workflow task(" + capID + ") for review: " + result.getErrorMessage()); }
 	return false;
