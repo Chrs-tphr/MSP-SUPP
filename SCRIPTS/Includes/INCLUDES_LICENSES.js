@@ -157,14 +157,12 @@ function completeRenewalOnWorkflow() {
 				}
 			}
 		}
-		else if (isWorkflowDenyForReview(capID, aa.env.getValue("WorkflowTask"), aa.env.getValue("SD_STP_NUM"), aa.env.getValue("ProcessID"),  aa.env.getValue("WorkflowStatus"))) {
+		if (isWorkflowDenyForReview(capID, aa.env.getValue("WorkflowTask"), aa.env.getValue("SD_STP_NUM"), aa.env.getValue("ProcessID"),  aa.env.getValue("WorkflowStatus"))) {
 			if (isReadyRenew(parentLicenseCAPID)) {
 				renewalCapProject = getRenewalCapByParentCapIDForReview(parentLicenseCAPID);
 				if (renewalCapProject != null) {
-					if (activeLicense(parentLicenseCAPID)) {
-						renewalCapProject.setStatus("Complete");
-						aa.cap.updateProject(renewalCapProject);
-					}
+					renewalCapProject.setStatus("Complete");
+					aa.cap.updateProject(renewalCapProject);
 					if (sendLicEmails) aa.expiration.sendDeniedNoticeEmailToCitizenUser(parentLicenseCAPID)
 				}
 			}
