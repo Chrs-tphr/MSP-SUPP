@@ -1,5 +1,7 @@
 var authCapId = getParentLicenseCapID(capId);
+
 prepareAppForRenewal();
+
 assessRenewalDecalFee();
 if(authCapId){
 	assessRenewalLateFees(authCapId);
