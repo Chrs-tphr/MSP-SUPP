@@ -192,6 +192,7 @@ function updateCert(updateType){
 				editRefLicProfAttribute(existingCarrierNum, "FED MOTOR CARRIER STATUS DATE", dateAdd(AInfo["FMC Effective Date"], 0));
 				//get refLp after attr updates
 				cLic = getRefLicenseProf(existingCarrierNum);
+				logDebug("Update FMC Status Checked ");
 			}
 			
 			if(AInfo["Update UCR Status"] == "CHECKED"){
@@ -200,10 +201,12 @@ function updateCert(updateType){
 				editRefLicProfAttribute(existingCarrierNum, "INTERSTATE UCR EXPIRATION DATE", AInfo["UCR Exipration Date"]);
 				//get refLp after attr updates
 				cLic = getRefLicenseProf(existingCarrierNum);
+				logDebug("Update UCR Status Checked ");
 			}
 			
 			if(AInfo["Update FMC Number"] == "CHECKED"){
 				cLic.setAddress3(AInfo["New FMC Number"]);
+				logDebug("Update FMC NUMBER Checked ");
 			}
 			
 			//close amendment
