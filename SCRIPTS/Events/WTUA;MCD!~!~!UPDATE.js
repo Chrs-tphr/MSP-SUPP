@@ -1,1 +1,4 @@
-updateCert("INTERUPDATE");
+if(wfStatus == "Approved")
+	{
+		updateCert("INTERUPDATE")
+	};
