@@ -198,7 +198,7 @@ function updateCert(updateType){
 			if(AInfo["Update UCR Status"] == "CHECKED"){
 				editRefLicProfAttribute(existingCarrierNum, "INTERSTATE UCR STATUS", AInfo["New UCR Status"]);
 				editRefLicProfAttribute(existingCarrierNum, "INTERSTATE UCR STATUS DATE", AInfo["UCR Effective Date"]);
-				editRefLicProfAttribute(existingCarrierNum, "INTERSTATE UCR EXPIRATION DATE", AInfo["UCR Exipration Date"]);
+				editRefLicProfAttribute(existingCarrierNum, "INTERSTATE UCR EXPIRATION DATE", dateAdd(AInfo["UCR Exipration Date"], 0));
 				//get refLp after attr updates
 				cLic = getRefLicenseProf(existingCarrierNum);
 				logDebug("Update UCR Status Checked ");
