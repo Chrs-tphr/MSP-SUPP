@@ -1,19 +1,25 @@
-var authCapId = getParentLicenseCapID(capId);
-
-convertRenewalToReal();
-
-logDebug("Before public user")
-if (!publicUser)
+if (AInfo["Dismiss Incomplete Application"] != "CHECKED")
 {
-	logDebug("After PUBLIC USER")
-	assessRenewalDecalFee();
-	if(authCapId)
+
+		var authCapId = getParentLicenseCapID(capId);
+		
+		convertRenewalToReal();
+		
+		logDebug("Before public user")
+		if (!publicUser)
 		{
-		assessRenewalLateFees(authCapId);
-		logDebug("After LATE FEES")
+			logDebug("After PUBLIC USER")
+			assessRenewalDecalFee();
+			if(authCapId)
+				{
+				assessRenewalLateFees(authCapId);
+				logDebug("After LATE FEES")
+				}
+
 		}
+		//
+		//if(feeExists("RENEWAL") == false){
+		//updateFee("RENEWAL","MCD_AUTH_RENEW","FINAL",1,"Y");
+		//}
 }
-//
-//if(feeExists("RENEWAL") == false){
-//	updateFee("RENEWAL","MCD_AUTH_RENEW","FINAL",1,"Y");
-//}
+
