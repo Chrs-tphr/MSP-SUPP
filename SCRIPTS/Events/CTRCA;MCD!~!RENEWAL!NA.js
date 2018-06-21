@@ -1,7 +1,4 @@
-if (AInfo["Dismiss Incomplete Application"] != "CHECKED")
-{
-
-		var authCapId = getParentLicenseCapID(capId);
+var authCapId = getParentLicenseCapID(capId);
 		
 		convertRenewalToReal();
 		
@@ -21,5 +18,5 @@ if (AInfo["Dismiss Incomplete Application"] != "CHECKED")
 		//if(feeExists("RENEWAL") == false){
 		//updateFee("RENEWAL","MCD_AUTH_RENEW","FINAL",1,"Y");
 		//}
-}
+
 
