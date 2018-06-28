@@ -192,3 +192,12 @@ else{ //Process Before Event with cancel check
 /*------------------------------------------------------------------------------------------------------/
 | <===========External Functions (used by Action entries)
 /------------------------------------------------------------------------------------------------------*/
+
+
+
+cancel = true;
+showMessage = true;
+comment("In SARA for ACA");
+showDebug = true;
+logDebug("LD SARA")
+iDontExist();
