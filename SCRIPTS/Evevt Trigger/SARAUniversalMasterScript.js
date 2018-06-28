@@ -117,6 +117,9 @@ while(keys.hasMoreElements())
  logDebug("Loaded Env Variable: " + key + " = " + aa.env.getValue(key));
 }
 
+var capModel = aa.env.getValue("CapModel");
+var currentUserID = aa.env.getValue("CurrentUserID");
+
 /*------------------------------------------------------------------------------------------------------/
 | END Event Specific Variables
 /------------------------------------------------------------------------------------------------------*/
@@ -197,9 +200,3 @@ else{ //Process Before Event with cancel check
 /*------------------------------------------------------------------------------------------------------/
 | <===========External Functions (used by Action entries)
 /------------------------------------------------------------------------------------------------------*/
-
-
-
-logDebug("REWTREWTREWTREWTREWTREW");
-
-iDoNotExist();
