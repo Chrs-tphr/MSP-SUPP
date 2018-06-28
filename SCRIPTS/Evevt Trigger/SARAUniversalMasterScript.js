@@ -117,9 +117,6 @@ while(keys.hasMoreElements())
  logDebug("Loaded Env Variable: " + key + " = " + aa.env.getValue(key));
 }
 
-var capModel = aa.env.getValue("CapModel");
-var currentUserID = aa.env.getValue("CurrentUserID");
-
 /*------------------------------------------------------------------------------------------------------/
 | END Event Specific Variables
 /------------------------------------------------------------------------------------------------------*/
