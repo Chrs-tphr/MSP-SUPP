@@ -13,7 +13,7 @@
 | START: USER CONFIGURABLE PARAMETERS
 |
 /------------------------------------------------------------------------------------------------------*/
-maxSeconds = 300;
+maxSeconds = 1500;
 emailText = "";
 message = "";
 br = "<br>";
@@ -174,62 +174,71 @@ if(emailAddress.length)
 /-----------------------------------------------------------------------------------------------------*/
 
 function mainProcess(){
-	var capFilterType = 0;
-	var capFilterStatus = 0;
-	var capCount = 0;
+//------------variables--------------//
+	
+	var startDate = new Date();
+	var startTime = startDate.getTime();
+	var maxSeconds = 1500;
+	
+	var incCapArr = [];
+	var incCapCount = 0;
 
-	var capResult = aa.cap.getCapIDsByAppSpecificInfoDateRange(asiFieldGroup, asiField, dFromDate, dToDate);
-
-	if (capResult.getSuccess()) {
-		myCaps = capResult.getOutput();
+	//------------variables--------------//
+	
+	
+	///*
+	
+	
+	
+	var capListSR = aa.cap.getCapIDList();
+	if(capListSR.getSuccess()){
+		var capList = capListSR.getOutput();
+		var capListLength = capList.length;
+		logDebug("capListLength: "+capListLength);
+		if(capListLength > 0){
+			for(i=0; i<capListLength; i++){
+				var rTime = elapsed();
+				if (rTime > maxSeconds) { // only continue if time hasn't expired
+					logDebug("WARNING","A script timeout has caused partial completion of this process.  Please re-run.  " + rTime + " seconds elapsed, " + maxSeconds + " allowed.") ;
+					timeExpired = true;
+					break;
+				}
+				
+				var thisCap = capList[i]; //*Class = CapIDScriptModel*/ viewObj("thisCap", thisCap);
+				
+				var capId = aa.cap.getCapID(thisCap.getID1(), thisCap.getID2(), thisCap.getID3()).getOutput(); //*Class = CapIDModel*/ viewObj("capId", capId);
+				
+				var capModel = aa.cap.getCapByPK(thisCap.getCapID(),true).getOutput(); //*Class = CapModel*/ viewObj("capModel", capModel);
+				
+//				var capScriptModel = aa.cap.getCap(capId).getOutput(); /*Class = CapScriptModel*/ viewObj("capScriptModel", capScriptModel);
+				
+//				break;
+				
+				if(capModel){
+					incCapCount++;
+//					if(incCapCount > 100)break;
+//					if(capModel.getAuditStatus() != "A")continue;
+//					if(capModel.isCompleteCap())continue;
+//					if(capModel.getCapClass() != "INCOMPLETE CAP")continue;
+//					if(!capModel.getCreatedByACA())continue;
+					logDebug("altId|"+capModel.getAltID()+"|File Date|"+capModel.getFileDate()+"|Cap Class|"+capModel.getCapClass()+"|Audit Status|"+capModel.getAuditStatus()+"|Complete|"+capModel.isCompleteCap());
+//					logDebug("capModel.getAuditStatus(): "+capModel.getAuditStatus());
+//					logDebug("capModel.getCapClass(): "+capModel.getCapClass());
+//					logDebug("capModel.isCompleteCap(): "+capModel.isCompleteCap());
+//					logDebug("capModel.isCreatedByACA(): "+capModel.isCreatedByACA());
+//					logDebug("capModel.getFileDate(): "+capModel.getFileDate());
+					
+//					incCapArr.push(cap);
+					
+				}
+			}
+			
+			logDebug("RunTime: "+rTime+", Checked: "+i+" of "+capListLength+" records, found "+incCapCount+" Incomplete");
+			
+		}else{
+			logDebug("ERROR no caps in list");
+		}
+	}else{
+		logDebug("ERROR no capListSR");
 	}
-	else { 
-		logDebug("ERROR: Getting records, reason is: " + capResult.getErrorMessage()) ;
-		return false
-	} 
-
-	for (myCapsXX in myCaps) {
-		if (elapsed() > maxSeconds) { // only continue if time hasn't expired
-			logDebug("WARNING","A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed.") ;
-			timeExpired = true ;
-			break; 
-		}
-
-     	var thisCapId = myCaps[myCapsXX].getCapID();
-   		capId = getCapId(thisCapId.getID1(), thisCapId.getID2(), thisCapId.getID3()); 
-		altId = capId.getCustomID();
-     	
-
-		if (!capId) {
-			logDebug("Could not get Cap ID");
-			continue;
-		}
-		cap = aa.cap.getCap(capId).getOutput();		
-		appTypeResult = cap.getCapType();	
-		appTypeString = appTypeResult.toString();	
-		appTypeArray = appTypeString.split("/");
-
-		if ( !( (appGroup == "*" || appGroup.indexOf(appTypeArray[0]) >= 0) && (appTypeType == "*" || appTypeType.indexOf(appTypeArray[1]) >= 0) &&
-			 (appSubtype == "*" || appSubtype.indexOf(appTypeArray[2]) >= 0) && (appCategory == "*" || appCategory.indexOf(appTypeArray[3]) >= 0) )) {
-			logDebug(altId + ": skipping due to record type of " + appTypeString)
-			capFilterType++;
-			continue;
-		}
-		
-		var capStatus = cap.getCapStatus();
-		if (exists(capStatus,skipAppStatusArray)) {
-			capFilterStatus++;
-			logDebug(altId + ": skipping due to application status of " + capStatus)
-			continue;
-		}
-
-		capCount++;
-		logDebug(altId);
-		
-		if (appStatus) updateAppStatus(appStatus, "Set by batch", capId);
-	}
-
- 	logDebug("Total CAPS qualified : " + myCaps.length);
-	logDebug("Ignored due to CAP type : " + capFilterType);
- 	logDebug("Total CAPS processed: " + capCount);
 }
