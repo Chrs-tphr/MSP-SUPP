@@ -221,7 +221,7 @@ function mainProcess(){
 					if(capModel.isCompleteCap())continue;
 					if(capModel.getCapClass() != "INCOMPLETE CAP")continue;
 //					if(!capModel.getCreatedByACA())continue;
-					logDebug("altId|"+capModel.getAltID()+"|File Date|"+capModel.getFileDate()+"|Cap Class|"+capModel.getCapClass()+"|Audit Status|"+capModel.getAuditStatus()+"|Complete|"+capModel.isCompleteCap());
+					logDebug(br+"altId|"+capModel.getAltID()+"|File Date|"+capModel.getFileDate()+"|Cap Class|"+capModel.getCapClass()+"|Audit Status|"+capModel.getAuditStatus()+"|Complete|"+capModel.isCompleteCap());
 //					logDebug("capModel.getAuditStatus(): "+capModel.getAuditStatus());
 //					logDebug("capModel.getCapClass(): "+capModel.getCapClass());
 //					logDebug("capModel.isCompleteCap(): "+capModel.isCompleteCap());
