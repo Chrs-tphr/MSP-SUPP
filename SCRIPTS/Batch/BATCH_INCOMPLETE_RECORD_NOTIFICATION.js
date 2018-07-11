@@ -182,6 +182,7 @@ function mainProcess(){
 	
 	var incCapArr = [];
 	var incCapCount = 0;
+	var activeRecs = 0;
 
 	//------------variables--------------//
 	
@@ -215,25 +216,23 @@ function mainProcess(){
 //				break;
 				
 				if(capModel){
-					incCapCount++;
+					activeRecs++;
 //					if(incCapCount > 100)break;
 //					if(capModel.getAuditStatus() != "A")continue;
 					if(capModel.isCompleteCap())continue;
-					if(capModel.getCapClass() != "INCOMPLETE CAP")continue;
+					if(!matches(capModel.getCapClass(),"INCOMPLETE CAP","INCOMPLETE EST"))continue;
 //					if(!capModel.getCreatedByACA())continue;
 					logDebug(br+"altId|"+capModel.getAltID()+"|File Date|"+capModel.getFileDate()+"|Cap Class|"+capModel.getCapClass()+"|Audit Status|"+capModel.getAuditStatus()+"|Complete|"+capModel.isCompleteCap());
-//					logDebug("capModel.getAuditStatus(): "+capModel.getAuditStatus());
-//					logDebug("capModel.getCapClass(): "+capModel.getCapClass());
-//					logDebug("capModel.isCompleteCap(): "+capModel.isCompleteCap());
-//					logDebug("capModel.isCreatedByACA(): "+capModel.isCreatedByACA());
-//					logDebug("capModel.getFileDate(): "+capModel.getFileDate());
 					
-//					incCapArr.push(cap);
+					//get email address
 					
+					//send notification
+					
+					incCapCount++;
 				}
 			}
 			
-			logDebug("RunTime: "+rTime+", Checked: "+i+" of "+capListLength+" records, found "+incCapCount+" Incomplete");
+			logDebug("RunTime: "+rTime+", Checked: "+i+" of "+capListLength+" records, found "+incCapCount+" Incomplete of "+activeRecs+" Active records");
 			
 		}else{
 			logDebug("ERROR no caps in list");
