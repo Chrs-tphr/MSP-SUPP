@@ -1,11 +1,8 @@
-if(publicUser)
-{
-	updateAppStatus("Applied", "Updated By Scripting")	
-}
+/*if(publicUser){}
 
 else
 	{
 	closeWorkflow()
 	updateCert("INTERUPDATE")
 	}
-
+*/
