@@ -1,6 +1,6 @@
 if(publicUser)
 {
-	updateAppStatus("Applied")	
+	updateAppStatus("Applied", "Updated By Scripting")	
 }
 
 else
