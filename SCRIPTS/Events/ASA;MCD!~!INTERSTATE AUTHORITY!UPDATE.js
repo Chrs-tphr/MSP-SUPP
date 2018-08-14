@@ -1,4 +1,7 @@
-if(publicUser){}
+if(publicUser)
+{
+	updateAppStatus("Applied")	
+}
 
 else
 	{
