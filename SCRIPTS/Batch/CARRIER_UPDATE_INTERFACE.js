@@ -13,7 +13,7 @@
 | START: USER CONFIGURABLE PARAMETERS
 |
 /------------------------------------------------------------------------------------------------------*/
-maxSeconds = 300;
+maxSeconds = 30000;
 emailText = "";
 message = "";
 br = "<br>";
