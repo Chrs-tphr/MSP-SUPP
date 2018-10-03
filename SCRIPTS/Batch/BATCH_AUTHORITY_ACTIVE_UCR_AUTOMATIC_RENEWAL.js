@@ -261,11 +261,11 @@ function mainProcess(){
 										//AM-138 End
 										}	
 										if(gotUCRStatus && gotUCRExpDate && gotAutoTransport){
-											logDebug(br+"Found "+oppType+" carrier, CVED#: "+thisAltId+" With UCR Status: "+statusUCR+" and UCR Expiration Year: "+ucrExpYear+ "Auto Transport=" + autoTransport + br);
+											logDebug(br+"Found "+oppType+" carrier, CVED#: "+thisAltId+" With UCR Status: "+statusUCR+" and UCR Expiration Year: "+ucrExpYear+ "Auto Transport=" + autoTransport);
 
 											//AM-138 Start
 											if(autoTransport == 'YES' || autoTransport == 'Y'){
-												logDebug(br+"CVED#: "+thisAltId+" has Auto Transport")
+												logDebug(br+"CVED#: "+thisAltId+" has Auto Transport" +br)
 											}					
 											//AM-138 End
 											break;
