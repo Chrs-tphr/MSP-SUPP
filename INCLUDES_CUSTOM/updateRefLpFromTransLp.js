@@ -60,6 +60,7 @@ function updateRefLpFromTransLp(){
 		newLic.setMaskedSsn(licProfScriptModel.getMaskedSsn());
 		// newLic.setLicenseBoard(licProfScriptModel.getLicenseBoard());
 		newLic.setBusinessName2(licProfScriptModel.getBusName2());
+		newLic.setComment(licProfScriptModel.getComment());
 		
 		/* ASI to LP */
 		if(AInfo["Worker's Compensation Exempt"] != null) {
