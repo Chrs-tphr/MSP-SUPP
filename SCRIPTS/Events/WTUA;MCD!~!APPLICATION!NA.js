@@ -6,7 +6,7 @@ if(wfTask == "Application Review" && matches(wfStatus,"Accepted","Incomplete Not
 
 if((wfTask == "Compliance Review" && wfStatus == "Compliance Approved") || (wfTask == "Certification" && wfStatus == "Approved/Fees Due")){
 	assessDecalFee();
-	var anyrdf = assessNextYearRenewalDecalFee();
+	var anyrdf = assessNextYearRenewalDecalFees();
 	if(anyrdf){
 		logDebug("Decal and Renewal Fees successfully updated on application");
 	}
