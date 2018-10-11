@@ -55,10 +55,10 @@ function assessDecalFee() {
 	}
 	if ((feeAmt > 0) && (approvDate != null)) {
 		updateFee("DECAL", "MCD_AUTH_APP", "FINAL", feeAmt, "N");
-		logDebug("If Statement Update Fee #1: "+updateFee);
+		logDebug("If Statement Update Fee #1: "+feeAmt);
 	}
 	if ((feeAmt > 0) && (updateFeesDate != null)) {
 		updateFee("DECAL", "MCD_EQUIP", "FINAL", feeAmt, "N");
-		logDebug("If Statement Update Fee #2: "+updateFee);
+		logDebug("If Statement Update Fee #2: "+feeAmt);
 	}
 }
