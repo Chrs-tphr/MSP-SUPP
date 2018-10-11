@@ -13,7 +13,7 @@ function assessNextYearRenewalDecalFee(){
 		var apprMonth = approvDate.getMonth() +1;
 		if(matches(apprMonth,10,11,12)){
 			//add renewal fee
-			updateFee("RENEWAL", "MCD_AUTH_RNW", "FINAL", 1, "N");
+			updateFee("RENEWAL", "MCD_AUTH_RENEW", "FINAL", 1, "N");
 			
 			feeAmt = 0;
 			equipTable = loadASITable("EQUIPMENT LIST");
@@ -22,7 +22,7 @@ function assessNextYearRenewalDecalFee(){
 			logDebug("Next Year Decal Fee Amount: "+feeAmt);
 			
 			if ((feeAmt > 0)) {
-				updateFee("NYDECAL", "MCD_AUTH_APP", "FINAL", feeAmt, "N");
+				updateFee("AUTORNWDECAL", "MCD_AUTH_APP", "FINAL", feeAmt, "N");
 				rtnVal = true;
 			}
 		}
