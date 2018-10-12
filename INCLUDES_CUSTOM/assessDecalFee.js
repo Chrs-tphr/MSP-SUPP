@@ -2,24 +2,29 @@ function assessDecalFee(){
 	//Application for Authority Approval date
 	approvDate = getStatusDateinTaskHistory("Compliance Review", "Compliance Approved");
 	logDebug("approvDate: "+approvDate);
+	var approvDateYear = null;
+	var updateFeesYear = null;
+	var approvJSDate = null;
+	var updateFeesJSDate = null;
 
 	if(approvDate != null){
-		var approvDateYear = 1900 + approvDate.getYear();
+		approvDateYear = 1900 + approvDate.getYear();
 		logDebug("approvDateYear: "+approvDateYear);
-		var approvJSDate = new Date((approvDate.getMonth() +1) + "/" + approvDate.getDay() + "/" + approvDateYear);
+		approvJSDate = new Date((approvDate.getMonth() +1) + "/" + approvDate.getDay() + "/" + approvDateYear);
 	}
 	//Update Equipment List Approved - Update Fees date
 	updateFeesDate = getStatusDateinTaskHistory("Application Review", "Approved - Update Fees");
 	logDebug("updateFeesDate: "+updateFeesDate);
 	
 	if(updateFeesDate != null){
-		var updateFeesYear = 1900 + updateFeesDate.getYear();
+		updateFeesYear = 1900 + updateFeesDate.getYear();
 		logDebug("updateFeesYear: "+updateFeesYear);
-		var updateFeesJSDate = new Date((updateFeesDate.getMonth() +1) + "/" + updateFeesDate.getDay() + "/" + updateFeesYear);
+		
+	    updateFeesJSDate = new Date((updateFeesDate.getMonth() +1) + "/" + updateFeesDate.getDay() + "/" + updateFeesYear);
 		logDebug("updateFeesJSDate: "+updateFeesJSDate);
 	}
 	//set $50 fee date range for Application for Authority
-	if(approvDate != null){
+	if(approvDate != null /*&& approvDateYear != null*/){
 		startJSDate = new Date("06/30/" + approvDateYear);
 		endJSDate = new Date("10/31/" + approvDateYear);
 		logDebug("startJSDate: "+startJSDate);
