@@ -1,4 +1,4 @@
-function assessNextYearRenewalDecalFee(){
+function assessNextYearRenewalDecalFees(){
 	var rtnVal = false;
 	//Application for Authority Approval date
 	approvDate = getStatusDateinTaskHistory("Compliance Review", "Compliance Approved");
