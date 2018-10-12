@@ -5,15 +5,18 @@ function assessDecalFee(){
 
 	if(approvDate != null){
 		var approvDateYear = 1900 + approvDate.getYear();
+		logDebug("approvDateYear: "+approvDateYear);
 		var approvJSDate = new Date((approvDate.getMonth() +1) + "/" + approvDate.getDay() + "/" + approvDateYear);
 	}
 	//Update Equipment List Approved - Update Fees date
 	updateFeesDate = getStatusDateinTaskHistory("Application Review", "Approved - Update Fees");
+	logDebug("updateFeesDate: "+updateFeesDate);
 	
 	if(updateFeesDate != null){
-		logDebug("updateFeesDate: "+updateFeesDate);
 		var updateFeesYear = 1900 + updateFeesDate.getYear();
+		logDebug("updateFeesYear: "+updateFeesYear);
 		var updateFeesJSDate = new Date((updateFeesDate.getMonth() +1) + "/" + updateFeesDate.getDay() + "/" + updateFeesYear);
+		logDebug("updateFeesJSDate: "+updateFeesJSDate);
 	}
 	//set $50 fee date range for Application for Authority
 	if(approvDate != null){
