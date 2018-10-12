@@ -10,7 +10,7 @@ if((wfTask == "Compliance Review" && wfStatus == "Compliance Approved") || (wfTa
 	if(wfDate != null){
 		logDebug("wfDate = " +wfDate);
 		var wfJsDate = new Date(wfDate);
-		var monthNum = wfDate.getMonth() + 1;
+		var monthNum = wfJsDate.getMonth() + 1;
 		logDebug("monthNum = " +monthNum);
 	}else{
 		logDebug("WF DATE IS NULL");
