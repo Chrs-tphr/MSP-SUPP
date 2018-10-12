@@ -1,5 +1,4 @@
 function assessNextYearRenewalDecalFees(){
-	logDebug("inside assessNextYearRenewalDecalFees");
 	var rtnVal = false;
 	updateFee("RENEWAL", "MCD_AUTH_RENEW", "FINAL", 1, "N");
 	feeAmt = 0;
