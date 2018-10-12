@@ -7,7 +7,20 @@ if(wfTask == "Application Review" && matches(wfStatus,"Accepted","Incomplete Not
 if((wfTask == "Compliance Review" && wfStatus == "Compliance Approved") || (wfTask == "Certification" && wfStatus == "Approved/Fees Due")){
 	assessDecalFee();
 	
-	var monthNum = wfDate.getMonth() +1;
+	if(wfDate != null)
+		{
+		
+			var monthNum = wfDate.getMonth() +1;
+			
+			
+			
+			
+			logDebug ("monthNum = " +monthNum);
+		}
+	else
+		{
+		logDebug ("WF DATE IS NULL");
+		}
 	if(matches(monthNum,10,11,12)){
 		var anyrdf = assessNextYearRenewalDecalFees();
 		if(anyrdf){
