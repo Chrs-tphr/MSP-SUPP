@@ -24,7 +24,7 @@ function assessDecalFee(){
 		logDebug("updateFeesJSDate: "+updateFeesJSDate);
 	}
 	//set $50 fee date range for Application for Authority
-	if(approvDate != null && approvDateYear != null){
+	if(approvDate != null){
 		startJSDate = new Date("06/30/" + approvDateYear);
 		endJSDate = new Date("10/31/" + approvDateYear);
 		logDebug("startJSDate: "+startJSDate);
@@ -32,7 +32,7 @@ function assessDecalFee(){
 	}
 	
 	//set $50 fee date range for Update Equipment List
-	if(updateFeesDate != null && updateFeesYear != null){
+	if(updateFeesDate != null){
 		startJSDate2 = new Date("06/30/" + updateFeesYear);
 		endJSDate2 = new Date("10/31/" + updateFeesYear);
 		logDebug("startJSDate2: "+startJSDate2);
