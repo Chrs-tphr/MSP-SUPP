@@ -1,7 +1,5 @@
 function assessNextYearRenewalDecalFees(){
 	var rtnVal = false;
-	//Commented out for renewal fees
-	//updateFee("RENEWAL", "MCD_AUTH_RENEW", "FINAL", 1, "N");
 	feeAmt = 0;
 	equipTable = loadASITable("EQUIPMENT LIST");
 	feeAmt = sumASITColumn(equipTable, "Plate Fee", "INCLUDE", "Vehicle Action", "Add Vehicle");
