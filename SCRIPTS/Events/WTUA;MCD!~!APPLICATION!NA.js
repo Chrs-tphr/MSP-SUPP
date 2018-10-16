@@ -7,18 +7,11 @@ if(wfTask == "Application Review" && matches(wfStatus,"Accepted","Incomplete Not
 if((wfTask == "Compliance Review" && wfStatus == "Compliance Approved") || (wfTask == "Certification" && wfStatus == "Approved/Fees Due")){
 	assessDecalFee();
 	
-	if(wfDate != null){
-		logDebug("wfDate = " +wfDate);
-		//var wfJsDate = new Date(wfDate);
-		var monthNum = wfDate.getMonth() + 1;
-		logDebug("monthNum = " +monthNum);
-	}else{
-		logDebug("WF DATE IS NULL");
-	}
-	if(matches(monthNum,10,11,12)){
+	var wfsm = new Date(wfDateMMDDYYYY).getMonth()+1;
+	if(matches(wfsm,10,11,12)){
 		var anyrdf = assessNextYearRenewalDecalFees();
 		if(anyrdf){
-			logDebug("Next Year Decal and Renewal Fees successfully updated on application");
+			logDebug("Decal and Renewal Fees successfully updated on application");
 		}
 	}
 }
