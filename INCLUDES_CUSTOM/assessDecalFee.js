@@ -29,7 +29,7 @@ function assessDecalFee(){
 		endJSDate = new Date("10/31/" + approvDateYear);
 		logDebug("startJSDate: "+startJSDate);
 		logDebug("endJSDate: "+endJSDate);
-	}
+	//}
 	
 	//set $50 fee date range for Update Equipment List
 	//if(updateFeesDate != null){
@@ -37,7 +37,7 @@ function assessDecalFee(){
 		endJSDate2 = new Date("10/31/" + updateFeesYear);
 		logDebug("startJSDate2: "+startJSDate2);
 		logDebug("endJSDate2: "+endJSDate2);
-	}
+	//}
 	
 	feeAmt = 0;
 	equipTable = loadASITable("EQUIPMENT LIST");
