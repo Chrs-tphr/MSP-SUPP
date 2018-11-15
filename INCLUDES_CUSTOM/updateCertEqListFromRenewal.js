@@ -36,7 +36,10 @@ function updateCertEqListFromRenewal(){
 		//update Attr Intrastate Authority Expiration Date
 		
 		var aCapStatus = aCapID.getCapStatus(); logDebug("aCapStatus: "+aCapStatus);
-		if(!matches(aCapStatus,"Active","Temporarily Discontinued")){
+		
+		//OLD CODE modifying TD carriers to Active after renewal.
+	  //if(!matches(aCapStatus,"Active","Temporarily Discontinued")){
+		if(!matches(aCapStatus,"Active")){
 			//update auth status
 			updateAppStatus("Active","",cCapID);
 			//update Attr Intrastate Authority Status
